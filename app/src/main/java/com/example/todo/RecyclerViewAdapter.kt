@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 
-class RecyclerViewAdapter(var items: List<String>) : RecyclerView.Adapter<RecyclerViewHolder>(){
+class RecyclerViewAdapter(var items: MutableList<String>) : RecyclerView.Adapter<RecyclerViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

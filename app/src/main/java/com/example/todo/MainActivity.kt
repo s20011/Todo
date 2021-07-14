@@ -2,6 +2,7 @@ package com.example.todo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 
 class MainActivity : AppCompatActivity() {
+
+    var item_list = mutableListOf<String>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -23,39 +26,35 @@ class MainActivity : AppCompatActivity() {
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         recycler_view.layoutManager = layoutManager
 
+        val adapter = RecyclerViewAdapter(item_list)
+        recycler_view.adapter = adapter
+
 
         val listener = CreateListener2()
         //val btClick = findViewById<Button>(R.id.bt_add)
-        bt_add.setOnClickListener(listener)
+        //bt_add.setOnClickListener(listener)
+        mt_add_bt.setOnClickListener(listener)
 
         /*var sampleList = mutableListOf<String>()
         for (i in 0..10){
             sampleList.add("List$i")
         }*/
 
-
-        val adapter = RecyclerViewAdapter(listener.item_List)
-        recycler_view.adapter = adapter
-
-
-
     }
 
-    private inner class CreateListener2: View.OnClickListener{
+    private inner class CreateListener2(): View.OnClickListener{
 
         var count: Int = 0
 
-        var item_List = mutableListOf<String>()
-
         fun CreateItemList(title:String) {
-            item_List.add(title)
+            item_list.add(title)
         }
         override fun onClick(v: View) {
             CreateItemList(addText.text.toString())
             count++
             test_text.text = count.toString()
-            val adapter = RecyclerViewAdapter(item_List)
-            recycler_view.adapter = adapter
+            Log.d("onClick","ClickStart")
+
 
 
         }
